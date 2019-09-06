@@ -111,11 +111,11 @@ def main():
     if (nextChar == "EOF"):
         print ("File is empty")
         return
-        
+
     while nextChar != "EOF":
         nextToken = lex(nextChar)
         if (nextToken == INVALID):
             break
-        nextChar = getChar()
+        nextChar = getNonBlank()
 
 main()
