@@ -99,9 +99,7 @@ def lex(char):
         nextChar = getChar()
         while(nextChar != EOF and nextChar != " " and (getCharClass(nextChar) == LETTER or getCharClass(nextChar) == DIGIT)):
             lexeme+=nextChar
-            print("Lexeme now", lexeme)
             nextChar = getChar()
-            print("New next char in loop", nextChar)
         nextToken = IDENT
         if nextChar != " " and nextChar != EOF:
             fileIndex -= 1
@@ -130,13 +128,11 @@ def main():
     if (nextChar == "EOF"):
         print ("File is empty")
         return
-    print("Next char", nextChar)
     # return
     while nextChar != "EOF":
         nextToken = lex(nextChar)
         if (nextToken == INVALID):
             break
         nextChar = getChar()
-        print("why", nextChar)
 
 main()
