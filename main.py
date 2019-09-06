@@ -1,3 +1,6 @@
+# TODO: Code is a mess, needs refactoring
+
+# Global variables
 fileName = "input.txt"
 inputFile = open(file=fileName, mode="r", encoding="utf8")
 inputContent = inputFile.read()
@@ -24,12 +27,10 @@ RIGHT_PAREN = 26
 lexeme = ""
 lexLen = 0
 
-def lookup(character):
+def lookupSymbol(character):
     if (character == "("):
-        # addChar()
         nextToken = LEFT_PAREN
     elif (character == ")"):
-        # addChar()
         nextToken = RIGHT_PAREN
     elif (character == "+"):
         # addChar()
@@ -91,45 +92,32 @@ def addChar(char):
 def lex(char):
     lexeme = ""
     charClass = getCharClass(char)
-    print("Char class is:", charClass)
     global fileIndex
 
     if (charClass == LETTER):
-        print("Letter here")
-        # addChar(char)
         lexeme+=char
         nextChar = getChar()
-        print("Next char here", nextChar)
-        while(nextChar != "EOF" and nextChar != " " and (getCharClass(nextChar) == LETTER or getCharClass(nextChar) == DIGIT)):
-            print("Boom")
-            # addChar(nextChar)
+        while(nextChar != EOF and nextChar != " " and (getCharClass(nextChar) == LETTER or getCharClass(nextChar) == DIGIT)):
             lexeme+=nextChar
             print("Lexeme now", lexeme)
             nextChar = getChar()
             print("New next char in loop", nextChar)
         nextToken = IDENT
-        if nextChar != " ":
+        if nextChar != " " and nextChar != EOF:
             fileIndex -= 1
 
     elif (charClass == DIGIT):
-        print("Digit here")
         lexeme+=char
         nextChar = getChar()
-        print("Next char here", nextChar)
-        while( (nextChar != "EOF") and (nextChar != " ") and (getCharClass(nextChar) == DIGIT) ):
-            print("Boom")
-            # addChar(nextChar)
+        while( (nextChar != EOF) and (nextChar != " ") and (getCharClass(nextChar) == DIGIT) ):
             lexeme+=nextChar
-            print("Lexeme now", lexeme)
             nextChar = getChar()
-            print("New next char in loop", nextChar)
         nextToken = INT_LIT
-        if nextChar != " ":
+        if nextChar != " " and nextChar != EOF:
             fileIndex -= 1
 
     elif (charClass == UNKNOWN):
-        print("Symbol here")
-        token = lookup(char)
+        token = lookupSymbol(char)
         lexeme+=char
         nextToken = token
 
