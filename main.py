@@ -33,31 +33,20 @@ def lookupSymbol(character):
     elif (character == ")"):
         nextToken = RIGHT_PAREN
     elif (character == "+"):
-        # addChar()
         nextToken = ADD_OP
     elif (character == "-"):
-        # addChar()
         nextToken = SUB_OP
     elif (character == "*"):
-        # addChar()
         nextToken = MULT_OP
     elif (character == "/"):
-        # addChar()
         nextToken = DIV_OP
     else:
-        # addChar()
         nextToken = INVALID
     
     return nextToken
 
 
 def getChar():
-    # nextChar = inputFile.read(1)
-    # if (nextChar == ""):
-    #     return "EOF"
-    # # while nextChar == " ":
-    # #     nextChar = inputFile.read(1)
-    # return nextChar
     global inputContent
     global fileIndex
     if (fileIndex < len(inputContent)):
@@ -82,12 +71,6 @@ def getCharClass(char):
     else:
         charClass = UNKNOWN
     return charClass
-
-def addChar(char):
-    # Adds a character to the lexeme
-    global lexeme
-    global lexLen
-    lexeme+=char
 
 def lex(char):
     lexeme = ""
@@ -128,7 +111,7 @@ def main():
     if (nextChar == "EOF"):
         print ("File is empty")
         return
-    # return
+        
     while nextChar != "EOF":
         nextToken = lex(nextChar)
         if (nextToken == INVALID):
