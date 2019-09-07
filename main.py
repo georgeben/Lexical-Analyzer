@@ -23,6 +23,14 @@ MULT_OP = 23
 DIV_OP = 24
 LEFT_PAREN = 25
 RIGHT_PAREN = 26
+FOR_CODE = 40
+IF_CODE = 41
+ELSE_CODE = 42
+WHILE_CODE = 43
+DO_CODE = 44
+INT_CODE = 45
+FLOAT_CODE = 46
+SWITCH_CODE = 47
 
 lexeme = ""
 lexLen = 0
@@ -83,7 +91,27 @@ def lex(char):
         while(nextChar != EOF and nextChar != " " and (getCharClass(nextChar) == LETTER or getCharClass(nextChar) == DIGIT)):
             lexeme+=nextChar
             nextChar = getChar()
-        nextToken = IDENT
+        
+        # Check for keywords
+        if (lexeme == "if"):
+            nextToken = IF_CODE
+        elif (lexeme == "for"):
+            nextToken = FOR_CODE
+        elif (lexeme == "else"):
+            nextToken = ELSE_CODE
+        elif (lexeme == "while"):
+            nextToken = WHILE_CODE
+        elif (lexeme == "do"):
+            nextToken = DO_CODE
+        elif (lexeme == "int"):
+            nextToken = INT_CODE
+        elif (lexeme == "float"):
+            nextToken = FLOAT_CODE
+        elif (lexeme == "switch"):
+            nextToken = SWITCH_CODE
+        else:
+            nextToken = IDENT
+            
         if nextChar != " " and nextChar != EOF:
             fileIndex -= 1
 
