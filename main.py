@@ -111,7 +111,7 @@ def lex(char):
             nextToken = SWITCH_CODE
         else:
             nextToken = IDENT
-            
+
         if nextChar != " " and nextChar != EOF:
             fileIndex -= 1
 
@@ -136,11 +136,11 @@ def lex(char):
 
 def main():
     nextChar = getNonBlank()
-    if (nextChar == "EOF"):
+    if (nextChar == EOF):
         print ("File is empty")
         return
 
-    while nextChar != "EOF":
+    while nextChar != EOF:
         nextToken = lex(nextChar)
         if (nextToken == INVALID):
             break
